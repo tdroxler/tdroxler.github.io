@@ -22,14 +22,12 @@
 
 OUTPUT="songs.json"
 
-# Find all .cho files, build JSON lines
 find "public" -type f -name "*.cho" | \
 while read -r file; do
    fname=$(basename "$file")
    title="${fname%.cho}"
-  # # Emit JSON object
+   relpath="${file#public/}"  # remove "public/" prefix
    printf '{ "title": "%s", "path": "%s" }\n' \
-     "$title" "$file"
-done  |\
-# Combine into a JSON array using jq
+     "$title" "$relpath"
+done | \
 jq -s '.' > "$OUTPUT"
