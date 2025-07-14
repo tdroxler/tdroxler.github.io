@@ -52,6 +52,9 @@ jobs:
       - name: Generate song index JSON
         run: |
           ./.github/scripts/generate_songs_index.sh
+          ls
+          ls public
+          cat public/songs.json
 
       - name: Install dependencies
         run: npm ci
